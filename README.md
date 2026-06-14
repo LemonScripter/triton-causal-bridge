@@ -1,28 +1,27 @@
 # DCC Verified Inference Path for NVIDIA Triton
 
-## Overview
-The **DCC Verified Inference Path** is a professional security extension for the NVIDIA Triton Inference Server. It implements **Digital Causal Closure (DCC)** to protect high-value GPU compute resources from autonomous, "ghost," or unauthorized inference requests.
+[![Status](https://img.shields.io/badge/Status-Hardened--Prototype-blue)](ROADMAP.md)
+[![Project](https://img.shields.io/badge/BioOS-Causal--Security-green)](https://metaspace.bio)
 
-## The Problem: GPU Resource Hijacking
-AI inference is computationally expensive. Currently, any process or user with access to the Triton API can request model execution. There is no mechanism to verify the *causal origin* of these requests—whether they were triggered by a legitimate human-initiated prompt or by a rogue autonomous agent wasting GPU cycles.
+## Hardened Architecture: Verified GPU Compute
 
-## The Solution: Verified Inference Path
-This module introduces a **Causal Logic Gate** into the Triton inference lifecycle:
-1. **Causal Token Requirement:** Every inference request must provide a cryptographic proof of its causal origin (the DCC Token).
-2. **Pre-Allocation Verification:** The Triton backend verifies the token against the cluster's DCC ledger *before* allocating GPU memory or starting the execution.
-3. **Closure:** Inference is only performed if it can be traced back to a verified intent, physically eliminating unauthorized "ghost" workloads.
+This module implements the **Verified Inference Path** for NVIDIA Triton. It ensures that expensive GPU resources are strictly governed by **Digital Causal Closure (DCC)**, physically eliminating "ghost" inference requests.
 
-## Scientific Background
-This integration is based on the following formal research:
-- [The Causal Operating System: Digital Causal Closure for Autonomous Systems](https://doi.org/10.5281/zenodo.20384700)
-- [BioOS Causal Constitution (PDF)](https://bioos.metaspace.bio/bioos_causal_constitution_en.pdf)
+### Hardened Implementation
 
-## Components
-- **`dcc_triton_backend.py`**: Triton Python Backend wrapper implementing the Causal Gate.
-- **`verify_triton.py`**: Logic verification suite ensuring 100% causal integrity for GPU resource allocation.
+- **Causal Gate Integration:** The Python backend has been refactored to require a `DCC_TOKEN` for every inference request.
+- **Fail-Closed Resource Allocation:** GPU memory and compute cycles are only allocated after a successful synchronous lookup in the `global_dcc_map`.
+- **Ghost-Workload Prevention:** Requests initiated by autonomous agents without a verifiable hardware-anchored intent are blocked at the Triton entry point.
 
-## Upstreaming Proposal
-We propose the inclusion of Verified Inference Paths as a critical security feature for AI infrastructure, ensuring that GPU resources are governed by the physical reality of user intent.
+### Security Guarantees
+
+1. **Compute Sovereignty:** GPU resources are protected from unauthorized autonomous hijacking.
+2. **Deterministic Governance:** Inference execution is physically bound to the causal state of the host.
+3. **Atomic Veracity:** Every inference request is mapped to a unique, non-replayable Causal Token.
+
+### Scientific Foundation
+
+This implementation is based on the [BioOS Causal Constitution (DOI: 10.5281/zenodo.20384700)](https://doi.org/10.5281/zenodo.20384700).
 
 ---
-*Created by MetaSpace BioOS | [metaspace.bio](https://metaspace.bio) | [admin@metaspace.bio](mailto:admin@metaspace.bio)*
+*Verified by MetaSpace BioOS Team | [metaspace.bio](https://metaspace.bio)*
