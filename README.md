@@ -19,9 +19,12 @@ This module implements the **Verified Inference Path** for NVIDIA Triton. It ens
 2. **Deterministic Governance:** Inference execution is physically bound to the causal state of the host.
 3. **Atomic Veracity:** Every inference request is mapped to a unique, non-replayable Causal Token.
 
-### Scientific Foundation
+### Scientific & Technical Foundation
 
-This implementation is based on the [BioOS Causal Constitution (DOI: 10.5281/zenodo.20384700)](https://doi.org/10.5281/zenodo.20384700).
+This implementation is based on the following formal specifications and research:
+
+- **Research Paper:** [The Causal Operating System: Digital Causal Closure for Autonomous Systems](https://doi.org/10.5281/zenodo.20384700)
+- **Formal Specification:** [BioOS Causal Constitution (PDF)](https://bioos.metaspace.bio/bioos_causal_constitution_en.pdf)
 
 ---
 *Verified by MetaSpace BioOS Team | [metaspace.bio](https://metaspace.bio)*
